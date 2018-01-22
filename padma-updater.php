@@ -26,14 +26,7 @@ You should have received a copy of the GNU General Public License
 along with Padma Updater plugin. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
-/*
-if(!class_exists('padma')){
-	return;
-}
-*/
 
-//include( plugin_dir_path(__FILE__) . 'class_tgm_updater.php');
-require 'plugin-update-checker/plugin-update-checker.php';
 include( plugin_dir_path(__FILE__) . 'plugin-update-checker/plugin-update-checker.php');
 include( plugin_dir_path(__FILE__) . 'class_padmaUpdater.php');
 
