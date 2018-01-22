@@ -46,7 +46,7 @@ class PadmaUpdater{
 
 		$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 			PADMA_CDN_URL . 'software/?action=get_metadata&slug=padma-updater',
-			__FILE__,
+			plugin_dir_path(__FILE__),
 			'padma-updater'
 		);
 		
