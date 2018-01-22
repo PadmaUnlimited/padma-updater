@@ -25,3 +25,48 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with Padma Updater plugin. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
+
+include( plugin_dir_path(__FILE__) . 'class_tgm_updater.php');
+include( plugin_dir_path(__FILE__) . 'class_padmaUpdaterAPI.php');
+
+
+define('PADMA_API_URL', 'https://api.padmaunlimited.com/');
+define('PADMA_CDN_URL', 'https://cdn.padmaunlimited.com/');
+
+
+/**
+ *
+ * Activation hook
+ *
+ */
+function padma_updater_activate(){
+	if ( ! current_user_can( 'activate_plugins' ) )
+	return;
+
+	$PadmaUpdaterAPI = new PadmaUpdaterAPI();
+	$PadmaUpdaterAPI->activation();
+
+}
+register_activation_hook( __FILE__, 'padma_updater_activate');
+
+
+/**
+ *
+ * Deactivation hook
+ *
+ */
+function padma_updater_deactivate(){
+	if ( ! current_user_can( 'activate_plugins' ) )
+	return;
+	
+	$PadmaUpdaterAPI = new PadmaUpdaterAPI();
+	$PadmaUpdaterAPI->deactivation();
+
+}
+register_deactivation_hook( __FILE__, 'padma_updater_deactivate');
+
+
+if (is_admin()) {
+	$PadmaUpdaterAPI = new PadmaUpdaterAPI();
+	$PadmaUpdaterAPI->updater();
+}
