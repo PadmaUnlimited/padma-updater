@@ -32,7 +32,9 @@ if(!class_exists('padma')){
 }
 */
 
-include( plugin_dir_path(__FILE__) . 'class_tgm_updater.php');
+//include( plugin_dir_path(__FILE__) . 'class_tgm_updater.php');
+require 'plugin-update-checker/plugin-update-checker.php';
+include( plugin_dir_path(__FILE__) . 'plugin-update-checker/plugin-update-checker.php');
 include( plugin_dir_path(__FILE__) . 'class_padmaUpdater.php');
 
 
