@@ -26,12 +26,14 @@ You should have received a copy of the GNU General Public License
 along with Padma Updater plugin. If not, see https://www.gnu.org/licenses/gpl-2.0.html.
 */
 
+/*
+if(!class_exists('padma')){
+	return;
+}
+*/
+
 include( plugin_dir_path(__FILE__) . 'class_tgm_updater.php');
-include( plugin_dir_path(__FILE__) . 'class_padmaUpdaterAPI.php');
-
-
-define('PADMA_API_URL', 'https://api.padmaunlimited.com/');
-define('PADMA_CDN_URL', 'https://cdn.padmaunlimited.com/');
+include( plugin_dir_path(__FILE__) . 'class_padmaUpdater.php');
 
 
 /**
@@ -43,8 +45,8 @@ function padma_updater_activate(){
 	if ( ! current_user_can( 'activate_plugins' ) )
 	return;
 
-	$PadmaUpdaterAPI = new PadmaUpdaterAPI();
-	$PadmaUpdaterAPI->activation();
+	$PadmaUpdater = new PadmaUpdater();
+	$PadmaUpdater->activation();
 
 }
 register_activation_hook( __FILE__, 'padma_updater_activate');
@@ -59,14 +61,14 @@ function padma_updater_deactivate(){
 	if ( ! current_user_can( 'activate_plugins' ) )
 	return;
 	
-	$PadmaUpdaterAPI = new PadmaUpdaterAPI();
-	$PadmaUpdaterAPI->deactivation();
+	$PadmaUpdater = new PadmaUpdater();
+	$PadmaUpdater->deactivation();
 
 }
 register_deactivation_hook( __FILE__, 'padma_updater_deactivate');
 
 
 if (is_admin()) {
-	$PadmaUpdaterAPI = new PadmaUpdaterAPI();
-	$PadmaUpdaterAPI->updater();
+	$PadmaUpdater = new PadmaUpdater();
+	add_action( 'init', array($PadmaUpdater,'updater') );
 }

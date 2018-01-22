@@ -126,11 +126,6 @@ class TGM_Updater {
             $this->$arg = $config[$arg];
         }
 
-        // If the user cannot update plugins, stop processing here.
-        if ( ! current_user_can( 'update_plugins' ) ) {
-            return;
-        }
-
         // Load the updater hooks and filters.
         add_filter( 'pre_set_site_transient_update_plugins', array( $this, 'update_plugins_filter' ) );
         add_filter( 'http_request_args', array( $this, 'http_request_args' ), 10, 2 );
