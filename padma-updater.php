@@ -33,7 +33,7 @@ include( plugin_dir_path(__FILE__) . 'class_padmaUpdater.php');
 
 /**
  *
- * Activation hook
+ * Activation hook 
  *
  */
 function padma_updater_activate(){
