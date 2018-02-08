@@ -63,7 +63,11 @@ function padma_updater_deactivate(){
 register_deactivation_hook( __FILE__, 'padma_updater_deactivate');
 
 
+
+
 if (is_admin()) {
+
+	add_action( 'plugins_loaded', array ( 'PadmaUpdater', 'init' ), 10 );
 
 	$PadmaUpdater = new PadmaUpdater();
 	$PadmaUpdater->updater('padma-updater',__DIR__);
