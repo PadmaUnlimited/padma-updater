@@ -36,7 +36,7 @@ class PadmaUpdater{
 	 * Updater
 	 *
 	 */
-	public function updater(){
+	public function updater($slug = 'padma-updater',$dir = __DIR__){
 
 		// Return early if not in the admin.
 		if ( ! is_admin() ) {
@@ -45,9 +45,9 @@ class PadmaUpdater{
 
 
 		$myUpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-			PADMA_CDN_URL . 'software/?action=get_metadata&slug=padma-updater',
-			plugin_dir_path(__FILE__),
-			'padma-updater'
+			PADMA_CDN_URL . 'software/?action=get_metadata&slug=' . $slug,
+			$dir,
+			$slug
 		);
 		
 	}
