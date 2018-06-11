@@ -58,8 +58,6 @@ class PadmaUpdater{
 				$target = $dir . '/' . $slug . '.php';
 			}
 
-			error_log($target);
-
 			$UpdateChecker = Puc_v4_Factory::buildUpdateChecker(
 				PADMA_CDN_URL . 'software/?action=get_metadata&slug=' . $slug,
 				$target,
