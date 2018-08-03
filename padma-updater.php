@@ -3,7 +3,7 @@
 Plugin Name:	Padma Updater
 Plugin URI:		https://padmaunlimited/plugins/padma-updater
 Description:  	Padma Updater plugin allows to your website to access and update Padma Theme and Padma Plugins
-Version:      	1.0.2
+Version:      	1.0.3
 Author:       	Plasma Soluciones
 Author URI:   	https://plasma.cr
 License:      	GPL2
