@@ -45,6 +45,8 @@ class PadmaUpdater{
 	 */
 	public function updater($slug = 'padma-updater',$dir = __DIR__ , $theme = false){
 
+		debug($slug);
+
 		// Return early if not in the admin.
 		if ( ! is_admin() ) {
 			return;
@@ -58,11 +60,18 @@ class PadmaUpdater{
 				$target = $dir . '/' . $slug . '.php';
 			}
 
-			$UpdateChecker = Puc_v4_Factory::buildUpdateChecker(
-				PADMA_CDN_URL . 'software/?action=get_metadata&slug=' . $slug,
-				$target,
-				$slug
-			);
+			$token = get_option('padma_service_token');
+
+			if($token != ''){
+				$url = PADMA_CDN_URL . 'software/?action=get_metadata&slug=' . $slug . '&token=' . $token;
+			}else{
+				$url = PADMA_CDN_URL . 'software/?action=get_metadata&slug=' . $slug;
+			}
+
+			$UpdateChecker = Puc_v4_Factory::buildUpdateChecker($url,$target,$slug);
+
+			//debug($UpdateChecker);
+
 		}
 
 		

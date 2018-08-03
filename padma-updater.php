@@ -3,7 +3,7 @@
 Plugin Name:	Padma Updater
 Plugin URI:		https://padmaunlimited/plugins/padma-updater
 Description:  	Padma Updater plugin allows to your website to access and update Padma Theme and Padma Plugins
-Version:      	1.0.0
+Version:      	1.0.2
 Author:       	Plasma Soluciones
 Author URI:   	https://plasma.cr
 License:      	GPL2
@@ -64,6 +64,9 @@ register_deactivation_hook( __FILE__, 'padma_updater_deactivate');
 
 
 
+function padma_updater_add_assets(){
+    wp_enqueue_script('padma-updater',plugins_url( 'padma-updater.js' , __FILE__ ), array( 'jquery' ));
+}
 
 if (is_admin()) {
 
@@ -72,4 +75,8 @@ if (is_admin()) {
 	$PadmaUpdater = new PadmaUpdater();
 	$PadmaUpdater->updater('padma-updater',__DIR__);
 
+
+	if(end(explode('/', $_SERVER['PHP_SELF']))=='update-core.php'){
+		add_action('init','padma_updater_add_assets');
+	}
 }
