@@ -7,6 +7,7 @@ class PadmaUpdater{
     {
         // Named global variable to make access for other scripts easier.
         $GLOBALS[ __CLASS__ ] = new self;
+
     }
 
 
@@ -71,8 +72,11 @@ class PadmaUpdater{
 			//debug($UpdateChecker);
 
 		}
-
 		
 	}
+
+	
+
+	
 
 }
