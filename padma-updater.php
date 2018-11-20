@@ -108,8 +108,9 @@ if (is_admin()) {
 	$PadmaUpdater = new PadmaUpdater();
 	$PadmaUpdater->updater('padma-updater',__DIR__);
 
+	$script = explode('/', $_SERVER['PHP_SELF']);
 
-	if(end(explode('/', $_SERVER['PHP_SELF']))=='update-core.php'){
+	if( end($script) == 'update-core.php' ){
 		add_action('init','padma_updater_add_assets');
 	}
 }
