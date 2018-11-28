@@ -48,7 +48,7 @@ class PadmaUpdater{
 
 		// Return early if not in the admin.
 		if ( ! is_admin() ) {
-			return;
+			//return;
 		}
 
 		if(file_exists($dir)){

@@ -73,6 +73,7 @@ function auto_update_padma_plugins ( $update, $item ) {
 	if ( PadmaOption::get('disable-automatic-plugin-updates') ){
 		return false;
 	}
+
 	// Array of plugin slugs to always auto-update
 	$plugins = array ( 
         'padma-content-slider',
@@ -101,13 +102,22 @@ function padma_updater_add_assets(){
     wp_enqueue_script('padma-updater',plugins_url( 'padma-updater.js' , __FILE__ ), array( 'jquery' ));
 }
 
+
+/**
+ *
+ * Start Updater
+ *
+ */
+
+add_action( 'plugins_loaded', array ( 'PadmaUpdater', 'init' ), 10 );
+$PadmaUpdater = new PadmaUpdater();
+$PadmaUpdater->updater('padma-updater',__DIR__);
+
+
+
 if (is_admin()) {
 
-	add_action( 'plugins_loaded', array ( 'PadmaUpdater', 'init' ), 10 );
-
-	$PadmaUpdater = new PadmaUpdater();
-	$PadmaUpdater->updater('padma-updater',__DIR__);
-
+	// Updates available icons
 	$script = explode('/', $_SERVER['PHP_SELF']);
 
 	if( end($script) == 'update-core.php' ){
