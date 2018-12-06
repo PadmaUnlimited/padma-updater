@@ -46,11 +46,6 @@ class PadmaUpdater{
 	 */
 	public function updater($slug = 'padma-updater',$dir = __DIR__ , $theme = false){
 
-		// Return early if not in the admin.
-		if ( ! is_admin() ) {
-			//return;
-		}
-
 		if(file_exists($dir)){
 
 			if($theme){
@@ -68,8 +63,6 @@ class PadmaUpdater{
 			}
 
 			$UpdateChecker = Puc_v4_Factory::buildUpdateChecker($url,$target,$slug);
-
-			//debug($UpdateChecker);
 
 		}
 		
