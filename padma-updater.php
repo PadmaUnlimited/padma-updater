@@ -27,6 +27,10 @@ along with Padma Updater plugin. If not, see https://www.gnu.org/licenses/gpl-2.
 */
 
 
+if(!defined('PADMA_CDN_URL')){
+	define('PADMA_CDN_URL', 'https://cdn.padmaunlimited.com/');			
+}
+
 include( plugin_dir_path(__FILE__) . 'plugin-update-checker/plugin-update-checker.php');
 include( plugin_dir_path(__FILE__) . 'class_padmaUpdater.php');
 
