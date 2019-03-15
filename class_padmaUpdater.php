@@ -38,6 +38,23 @@ class PadmaUpdater{
 	public function deactivation(){
 	}
 
+	/**
+	 *
+	 * Detect CMS
+	 *
+	 */
+	private static function detect_cms() {
+
+
+		if(function_exists('classicpress_version_short')){
+			$cms = 'ClassicPress';
+		}else{
+			$cms = 'WordPress';			
+		}		
+	    
+	    return $cms;
+	}
+	
 
 	/**
 	 *
@@ -61,6 +78,8 @@ class PadmaUpdater{
 			}else{
 				$url = PADMA_CDN_URL . 'software/?action=get_metadata&slug=' . $slug;
 			}
+
+			$url .= '&cms=' . self::detect_cms();
 
 			$UpdateChecker = Puc_v4_Factory::buildUpdateChecker($url,$target,$slug);
 
