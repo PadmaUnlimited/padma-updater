@@ -99,7 +99,7 @@ function auto_update_padma_plugins ( $update, $item ) {
 
 }
 if ( get_option('padma-disable-automatic-plugin-updates') != '1'){	
-	add_filter( 'auto_update_plugin', 'auto_update_padma_plugins', 50, 2 );		
+	add_filter( 'auto_update_plugin', 'auto_update_padma_plugins', 10, 2 );		
 }
 
 
