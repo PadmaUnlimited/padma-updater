@@ -128,4 +128,5 @@ if (is_admin()) {
 	if( end($script) == 'update-core.php' ){
 		add_action('init','padma_updater_add_assets');
 	}
+	
 }
