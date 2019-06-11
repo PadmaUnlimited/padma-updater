@@ -104,7 +104,7 @@ class PadmaUpdater{
 	 * Updater
 	 *
 	 */
-	public static function updater($slug = 'padma-updater', $dir = __DIR__ , $theme = false, $checkPeriod = 1){
+	public static function updater($slug = 'padma-updater', $dir = __DIR__ , $theme = false, $checkPeriod = 12){
 
 		if(file_exists($dir)){
 
