@@ -78,8 +78,7 @@ function auto_update_padma_plugins ( $update, $item ) {
 		return false;
 	}
 
-	if ( in_array( $item->slug, PadmaUpdater::plugins() ) ) {
-		error_log('Allow update of ' . $item->slug);
+	if ( in_array( $item->slug, PadmaUpdater::plugins() ) ) {		
         return true;
     } else {
         return $update; // Else, use the normal API response to decide whether to update or not
