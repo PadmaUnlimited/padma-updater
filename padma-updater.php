@@ -3,7 +3,7 @@
 Plugin Name:	Padma Updater
 Plugin URI:		https://padmaunlimited/plugins/padma-updater
 Description:  	Padma Updater plugin allows to your website to access and update Padma Theme and Padma Plugins
-Version:      	1.0.5
+Version:      	1.0.6
 Author: 		Padma Unlimited Team
 Author URI: 	https://www.padmaunlimited.com/
 License:      	GPL2
@@ -74,38 +74,19 @@ register_deactivation_hook( __FILE__, 'padma_updater_deactivate');
  */
 function auto_update_padma_plugins ( $update, $item ) {
 
-	if ( PadmaOption::get('disable-automatic-plugin-updates') ){
+	if ( get_option('padma-disable-automatic-plugin-updates') ){
 		return false;
 	}
 
-	// Array of plugin slugs to always auto-update
-	$plugins = array ( 
-        'padma-content-slider',
-        'padma-example',
-        'padma-filter-gallery',
-        'padma-lifesaver',
-        'padma-post-slider',
-        'padma-services',
-        'padma-shortcode-block',
-        'padma-sociable',
-        'padma-visual-elements',
-    );
-
-	if ( in_array( $item->slug, $plugins ) ) {
+	if ( in_array( $item->slug, PadmaUpdater::plugins() ) ) {
+		error_log('Allow update of ' . $item->slug);
         return true;
     } else {
         return $update; // Else, use the normal API response to decide whether to update or not
     }
 
 }
-if ( get_option('padma-disable-automatic-plugin-updates') != '1'){	
-	add_filter( 'auto_update_plugin', 'auto_update_padma_plugins', 10, 2 );		
-}
-
-
-function padma_updater_add_assets(){
-    wp_enqueue_script('padma-updater',plugins_url( 'padma-updater.js' , __FILE__ ), array( 'jquery' ));
-}
+add_filter( 'auto_update_plugin', 'auto_update_padma_plugins', 10, 2 );
 
 
 /**
@@ -113,12 +94,17 @@ function padma_updater_add_assets(){
  * Start Updater
  *
  */
-
-add_action( 'plugins_loaded', array ( 'PadmaUpdater', 'init' ), 10 );
-$PadmaUpdater = new PadmaUpdater();
-$PadmaUpdater->updater('padma-updater',__DIR__);
+add_action( 'plugins_loaded', array ( 'PadmaUpdater', 'init' ), 1 );
 
 
+/**
+ *
+ * Admin assets
+ *
+ */
+function padma_updater_add_assets(){
+    wp_enqueue_script('padma-updater',plugins_url( 'padma-updater.js' , __FILE__ ), array( 'jquery' ));
+}
 
 if (is_admin()) {
 
@@ -130,3 +116,5 @@ if (is_admin()) {
 	}
 	
 }
+
+
