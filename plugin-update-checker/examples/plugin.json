@@ -1,7 +1,7 @@
 {
-	"name": "Padma Updater",
-	"version": "0.0.2",
-	"download_url": "https://cdn.padmaunlimited.com/software/padma-updater.zip",
+	"name": "My Example Plugin",
+	"version": "2.0",
+	"download_url": "http://example.com/updates/example-plugin.zip",
 
 	"homepage": "http://example.com/",
 	"requires": "4.5",
