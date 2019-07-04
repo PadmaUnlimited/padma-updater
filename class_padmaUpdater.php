@@ -66,6 +66,7 @@ class PadmaUpdater{
 		        'padma-post-slider',
 		        'padma-services',
 		        'padma-shortcode-block',
+		        'padma-slider-revolution',
 		        'padma-sociable',
 		        'padma-visual-elements',
 		        'padma-updater',
@@ -134,6 +135,11 @@ class PadmaUpdater{
 			}
 
 			$url .= '&cms=' . self::detect_cms();
+
+			add_filter('puc_is_slug_in_use-' . $slug, function(){
+				return false;
+			});			
+
 			$UpdateChecker = Puc_v4_Factory::buildUpdateChecker($url,$target,$slug,$checkPeriod);
 
 		}

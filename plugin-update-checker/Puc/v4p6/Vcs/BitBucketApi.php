@@ -18,7 +18,7 @@ if ( !class_exists('Puc_v4p6_Vcs_BitBucketApi', false) ):
 		private $repository;
 
 		public function __construct($repositoryUrl, $credentials = array()) {
-			$path = parse_url($repositoryUrl, PHP_URL_PATH);
+			$path = @parse_url($repositoryUrl, PHP_URL_PATH);
 			if ( preg_match('@^/?(?P<username>[^/]+?)/(?P<repository>[^/#?&]+?)/?$@', $path, $matches) ) {
 				$this->username = $matches['username'];
 				$this->repository = $matches['repository'];
@@ -157,11 +157,11 @@ if ( !class_exists('Puc_v4p6_Vcs_BitBucketApi', false) ):
 		 * @return null|string Either the contents of the file, or null if the file doesn't exist or there's an error.
 		 */
 		public function getRemoteFile($path, $ref = 'master') {
-			$response = $this->api('src/' . $ref . '/' . ltrim($path));
-			if ( is_wp_error($response) || !is_string($response) ) {
+			$response = $this->api('src/' . $ref . '/' . ltrim($path), '1.0');
+			if ( is_wp_error($response) || !isset($response, $response->data) ) {
 				return null;
 			}
-			return $response;
+			return $response->data;
 		}
 
 		/**
@@ -186,16 +186,13 @@ if ( !class_exists('Puc_v4p6_Vcs_BitBucketApi', false) ):
 		 * @return mixed|WP_Error
 		 */
 		public function api($url, $version = '2.0') {
-			$url = ltrim($url, '/');
-			$isSrcResource = Puc_v4p6_Utils::startsWith($url, 'src/');
-
 			$url = implode('/', array(
 				'https://api.bitbucket.org',
 				$version,
 				'repositories',
 				$this->username,
 				$this->repository,
-				$url
+				ltrim($url, '/')
 			));
 			$baseUrl = $url;
 
@@ -216,13 +213,7 @@ if ( !class_exists('Puc_v4p6_Vcs_BitBucketApi', false) ):
 			$code = wp_remote_retrieve_response_code($response);
 			$body = wp_remote_retrieve_body($response);
 			if ( $code === 200 ) {
-				if ( $isSrcResource ) {
-					//Most responses are JSON-encoded, but src resources just
-					//return raw file contents.
-					$document = $body;
-				} else {
-					$document = json_decode($body);
-				}
+				$document = json_decode($body);
 				return $document;
 			}
 
