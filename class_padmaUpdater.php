@@ -63,11 +63,13 @@ class PadmaUpdater{
 		        'padma-filter-gallery',
 		        'padma-gallery',
 		        'padma-lifesaver',
+		        'padma-lottiefiles',
 		        'padma-post-slider',
 		        'padma-services',
 		        'padma-shortcode-block',
 		        'padma-slider-revolution',
 		        'padma-sociable',
+		        'padma-store',
 		        'padma-visual-elements',
 		        'padma-updater',
 		    );
