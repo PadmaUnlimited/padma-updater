@@ -116,11 +116,7 @@ class PadmaUpdater{
 			 * Use developer version only for Theme and Updater
 			 *
 			 */			
-			if($theme || $slug == 'padma-updater' ||  $slug == 'padma-sociable' ||  $slug == 'padma-visual-elements' || $slug == 'padma-gallery'){
-				$package_type = (get_option('padma-use-developer-version')) ? 'developer': 'software';
-			}else{
-				$package_type = 'software';
-			}
+			$package_type = (get_option('padma-use-developer-version')) ? 'developer': 'software';			
 			
 			if($theme){
 				$target = $dir . '/functions.php';
