@@ -113,7 +113,7 @@ class PadmaUpdater{
 
 			/**
 			 *
-			 * Use developer version only for Theme and Updater
+			 * Use "developer" version or "production" version
 			 *
 			 */			
 			$package_type = (get_option('padma-use-developer-version')) ? 'developer': 'software';			
